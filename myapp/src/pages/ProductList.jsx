@@ -1,10 +1,10 @@
-import Product from '../Components/Product';
+import ProductList from '../features/products/components/ProductList';
 
 function ProductDetail() {
     return (
         <div className="row">
             <div className="col">
-                <Product />
+                <ProductList />
             </div>
         </div>
     );
