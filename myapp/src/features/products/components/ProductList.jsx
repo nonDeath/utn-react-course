@@ -23,10 +23,9 @@ function ProductList() {
         <div>
             <h1>Listado de Productos</h1>
             <div className="row row-cols-1 row-cols-md-3 g-4">
-
-                    {
-                        products.map(({id, title, currency_id, price, available_quantity, thumbnail}) => (
-                            <div className="col">
+                {
+                    products.map(({id, title, currency_id, price, available_quantity, thumbnail}) => (
+                        <div className="col">
                             <Product
                                 key={id}
                                 title={title}
@@ -35,9 +34,9 @@ function ProductList() {
                                 availableQuantity={available_quantity}
                                 thumbnail={thumbnail}
                             />
-                            </div>
-                        ))
-                    }
+                        </div>
+                    ))
+                }
             </div>
         </div>
     );
