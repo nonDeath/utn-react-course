@@ -1,4 +1,6 @@
-function Product({title, currency, price, availableQuantity, thumbnail}) {
+import { Link } from "react-router-dom";
+
+function Product({id, title, currency, price, availableQuantity, thumbnail}) {
     return (
         <div className="card h-100">
             <div className="overflow-hidden w-100 h-50">
@@ -11,7 +13,7 @@ function Product({title, currency, price, availableQuantity, thumbnail}) {
                     <span>{currency} {price.toLocaleString('es-AR')}</span>
                 </h5>
                 <p className="card-text">Stock dispopnible ({ availableQuantity })</p>
-                <a href="#" className="btn btn-primary">Ver detalle</a>
+                <Link to={`/product/${id}`} className="btn btn-primary">Ver detalle</Link>
             </div>
         </div>
     );

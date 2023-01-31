@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import get from "../services/ProductService";
+import { get } from "../services/ProductService";
 import Product from "./Product";
 
 function ProductList() {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         try {
@@ -13,21 +14,24 @@ function ProductList() {
             }
 
             fetchProducts();
+            setLoading(false);
         } catch (error) {
             console.log(error);
         }
     }, []);
 
+    if (loading) {
+        return <div>Cargando ...</div>;
+    }
 
     return (
         <div>
-            <h1>Listado de Productos</h1>
             <div className="row row-cols-1 row-cols-md-3 g-4">
                 {
                     products.map(({id, title, currency_id, price, available_quantity, thumbnail}) => (
-                        <div className="col">
+                        <div className="col" key={id}>
                             <Product
-                                key={id}
+                                id={id}
                                 title={title}
                                 currency={currency_id}
                                 price={price}
