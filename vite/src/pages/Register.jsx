@@ -2,15 +2,19 @@ import {useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { InformationCircleIcon } from '@heroicons/react/24/solid';
 import {registerUser} from '../features/auth/Auth';
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
   const {
     register, handleSubmit, formState: { errors, isSubmitting }, watch,
   } = useForm();
   const onSubmit = async ({email, password, firstName, lastName}) => {
     try {
       const user = await registerUser(email, password, firstName, lastName);
+      localStorage.setItem('successMessage', 'Registro exitoso. Por favor inicia sesión.');
+      navigate('/login');
     } catch (error) {
       alert(error.message);
       setError(error.message);

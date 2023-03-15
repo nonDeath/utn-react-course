@@ -2,7 +2,7 @@
 import { useForm } from "react-hook-form";
 import { signIn } from "../features/auth/Auth";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InformationCircleIcon } from '@heroicons/react/24/solid';
 
 function Login() {
@@ -25,12 +25,32 @@ function Login() {
         }
     }
 
+    const [successMessage, setSuccessMessage] = useState(null);
+
+    useEffect(() => {
+      const message = localStorage.getItem('successMessage');
+      console.log(localStorage.getItem('successMessage'))
+      if (message) {
+        setSuccessMessage(message);
+        localStorage.removeItem('successMessage');
+      }
+    }, []);
+
     return (
         <div className="grid min-h-full place-items-center py-12 px-6 sm:py-12 lg:px-8">
+            {successMessage && <div className="px-4y-3 sm:px-0 w-full mb-4">
+                <div className="bg-blue-100 border-l-4 border-blue-500 text-blue-500 p-4" role="alert">
+                    <p>
+                        <InformationCircleIcon className="h-6 w-6 text-blue-500 inline" />
+                        {' '}
+                        {successMessage}
+                    </p>
+                </div>
+            </div>}
             <h1 className="text-center text-2xl mb-8">
                 Login
             </h1>
-            <div className="overflow-hidden shadow sm:rounded-md w-1/2">
+            <div className="overflow-hidden shadow sm:rounded-md lg:w-1/2">
                 <div className="bg-white px-4 py-5 sm:p-6">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-4">
