@@ -29,7 +29,7 @@ function Login() {
 
     useEffect(() => {
       const message = localStorage.getItem('successMessage');
-      console.log(localStorage.getItem('successMessage'))
+
       if (message) {
         setSuccessMessage(message);
         localStorage.removeItem('successMessage');
